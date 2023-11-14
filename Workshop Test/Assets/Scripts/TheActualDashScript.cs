@@ -25,16 +25,13 @@ public class TheActualDashScript : MonoBehaviour
     private ThirdPersonActionsAsset thirdPersonActionsAsset;
 
     [Header("Enemy Collider Reference")]
-    Collider collider;
+    Collider enemyCollider;
     Enemy enemy;
-
-    public Transform raycastTransform;
-
     public LayerMask intendedLayer;
     [SerializeField] private float blitzRadius = 5f;
     [SerializeField] private float baseSkillDamage = 10f;
 
-    bool collideEnemy;
+    private int collisionCount;
 
     // start of input
     private void Awake()
@@ -58,14 +55,23 @@ public class TheActualDashScript : MonoBehaviour
         pm = GetComponent<PlayerController>();
 
         // enemy collider
-        collider = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Collider>();
+        enemyCollider = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Collider>();
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
     }
 
     private void Update()
     {
+        if (collisionCount == 0)
+                baseSkillCooldown = originalBaseSkillCooldown;
+
         if (thirdPersonActionsAsset.Player.Dash.triggered)
         {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, blitzRadius, intendedLayer))
+                collisionCount = 1;
+            else
+                collisionCount = 0;
+
             Dash();
         }
 
@@ -82,7 +88,7 @@ public class TheActualDashScript : MonoBehaviour
             dashCdTimer = baseSkillCooldown;
         }
         pm.dashing = true;
-        collider.isTrigger = true;
+        enemyCollider.isTrigger = true;
         pm.isInvincible = true;
         Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
 
@@ -97,10 +103,11 @@ public class TheActualDashScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             baseSkillCooldown = newBaseSkillCooldown;
             enemy.enemyHealth -= baseSkillDamage;
+            collisionCount = 1;
         }
     }
 
@@ -113,6 +120,6 @@ public class TheActualDashScript : MonoBehaviour
     private void ResetDash()
     {
         pm.dashing = false;
-        collider.isTrigger = false;
+        enemyCollider.isTrigger = false;
     }    
 }

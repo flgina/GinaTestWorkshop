@@ -835,7 +835,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494968163}
-  m_LocalRotation: {x: 0.52545565, y: -0.027535751, z: 0.017018033, w: 0.85020494}
+  m_LocalRotation: {x: 0.52545565, y: -0.027535714, z: 0.01701801, w: 0.85020494}
   m_LocalPosition: {x: -51.18729, y: 6, z: -27.743587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1051,7 +1051,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761566015}
-  m_LocalRotation: {x: 0.47229257, y: 0.000000015166425, z: -0.000000008126446, w: 0.88144183}
+  m_LocalRotation: {x: 0.47229257, y: -0.000000015166425, z: 0.000000008126446, w: 0.88144183}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1213,7 +1213,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928779294}
-  m_LocalRotation: {x: 0.52573115, y: -0.000000014636623, z: 0.000000009045929, w: 0.85065085}
+  m_LocalRotation: {x: 0.52573115, y: 0.000000014636623, z: -0.000000009045929, w: 0.85065085}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1369,6 +1369,8 @@ MonoBehaviour:
   dashSpeed: 20
   dashSpeedChangeFactor: 50
   dashing: 0
+  isInvincible: 0
+  dodgeIFrames: 0.15
 --- !u!136 &1043766724
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1443,7 +1445,6 @@ MonoBehaviour:
   newBaseSkillCooldown: 4
   originalBaseSkillCooldown: 8
   dashCdTimer: 0
-  raycastTransform: {fileID: 2089396442}
   intendedLayer:
     serializedVersion: 2
     m_Bits: 128
