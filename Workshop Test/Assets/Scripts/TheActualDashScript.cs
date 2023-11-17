@@ -101,6 +101,7 @@ public class TheActualDashScript : MonoBehaviour
         {
             baseSkillCooldown = newBaseSkillCooldown;
             enemy.enemyHealth -= baseSkillDamage;
+            //other.GetComponent<NewEnemyHealth>().EnemyTakeDamage(finalSkillValue);
         }
     }
 
